@@ -1,0 +1,16 @@
+---
+# Playbook with tags
+
+- name: Install Software
+  hosts: all
+  become: yes
+  
+  vars_files:
+    - roles/deploy_wordpress/vars/main.yml
+    - roles/deploy_wordpress/vars/wordpress_vault.yml  
+
+  roles:
+    - { role: deploy_nginx, when: ansible_system == 'Linux', tags: [nginx, main] }
+    - { role: deploy_mysql, when: ansible_system == 'Linux', tags: [db, main] }
+    - { role: deploy_fpm, when: ansible_system == 'Linux', tags: [php, fpm] }
+    - { role: deploy_wordpress, when: ansible_system == 'Linux', tags: [cms, main] }  
