@@ -1,0 +1,55 @@
+---
+# tasks file for deploy_nginx
+- name: Check and Print LINUX Version
+  debug: var=ansible_os_family
+
+# Variable setup.
+- name: Include OS-specific variables.
+  include_vars: "{{ ansible_os_family }}.yml"
+
+- block: # ======Block for Redhat=====
+
+  - name: Install Nginx Web Server for Redhat
+    yum: name=nginx state=latest
+    notify:
+      - reload nginx
+  when: ansible_os_family == "Redhat"
+
+- block: # ======Block for Debian=====
+
+  - name: Install Nginx Web Server for Debian
+    apt: update_cache=yes cache_valid_time=86400
+    changed_when: false
+    apt:
+      name: nginx
+      state: present
+    notify:
+      - reload nginx
+  when: ansible_os_family == "Debian"
+
+- name: Copy nginx configuration in place.
+  template:
+    src: "{{ nginx_conf_template }}"
+    dest: "{{ nginx_conf_file_path }}"
+    owner: root
+    group: root
+    mode: 0644
+
+- name: Start Nginx and Enable it on the every boot for Redhat
+  service: name=nginx state=started enabled=yes
+
+- name: Generate INDEX.HTML file
+  template: src=./index.j2 dest={{ destin_folder }}/index.html mode=0555
+  notify:
+     - Restart Nginx Redhat
+     - Restart Nginx Debian
+
+- name: Copy MyHomePage to Servers to Web Server
+  copy: src=./{{ item }} dest={{ destin_folder }} mode=0555
+  loop:
+     - "GB.png"
+     - "ANS.png"
+  notify:
+     - Restart Nginx Redhat
+     - Restart Nginx Debian
+
