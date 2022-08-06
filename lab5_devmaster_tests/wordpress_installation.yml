@@ -1,0 +1,5 @@
+---
+- name: Deploy Wordpress
+  ansible.builtin.include_role:
+    name: deploy_wordpress
+  when: ansible_system == 'Linux'

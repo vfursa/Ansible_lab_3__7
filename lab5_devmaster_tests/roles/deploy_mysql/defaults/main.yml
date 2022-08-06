@@ -1,0 +1,24 @@
+---
+# defaults file for deploy_mysql
+# Pass in a comma-separated list of repos to use (e.g. "remi,epel"). Used only
+# for RedHat systems (and derivatives).
+mysql_enablerepo: ""
+
+# Define a custom list of packages to install; if none provided, the default
+# package list from vars/[OS-family].yml will be used.
+# mysql_packages:
+#   - mysql
+#   - mysql-server
+#   - MySQL-python
+
+mysql_python_package_debian: python3-mysqldb
+
+# MySQL connection settings.
+mysql_port: "3306"
+mysql_bind_address: '0.0.0.0'
+mysql_skip_name_resolve: false
+mysql_datadir: /var/lib/mysql
+mysql_sql_mode: ~
+# The following variables have a default value depending on operating system.
+# mysql_pid_file: /var/run/mysqld/mysqld.pid
+# mysql_socket: /var/lib/mysql/mysql.sock
