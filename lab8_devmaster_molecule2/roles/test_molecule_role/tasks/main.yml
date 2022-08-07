@@ -1,0 +1,23 @@
+---
+# tasks file for test_molecule_role
+- name: Create folder
+  file:
+    path: /home/victor/test_molecule
+    state: directory
+    mode: 0755
+
+- name: Get timestamp from the system
+  shell: "date +%Y-%m-%d%H-%M-%S"
+  register: tstamp
+
+- name: Set variables
+  set_fact:
+    cur_date: "{{ tstamp.stdout[0:10]}}"
+
+- name: Create file
+  copy:
+    dest: /home/victor/test_molecule/file_molecule.txt
+    content: |
+      Text Line1, in file_molecule
+      Text Line2, in file_molecule 
+      {{ cur_date }}

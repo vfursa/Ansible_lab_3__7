@@ -1,0 +1,8 @@
+---
+- name: Converge
+  hosts: all
+  gather_facts: false
+  tasks:
+    - name: "Include deploy_nginx"
+      ansible.builtin.include_role:
+        name: "deploy_nginx"
