@@ -1,0 +1,15 @@
+---
+- name: Converge
+  hosts: localhost
+  gather_facts: false
+  tasks:
+    - name: "Include common.test_molecule_role"
+      ansible.builtin.include_role:
+        name: "common.test_molecule_role"
+    - name: "Add vars"
+      ansible.builtin.include_vars:
+        file: vars.yml
+        name: file_vars  
+
+        #        test_conf_dir: "/home/victor/test_molecule"
+        #        test_context_file: "{{ test_conf_dir }}/file_molecule.txt"

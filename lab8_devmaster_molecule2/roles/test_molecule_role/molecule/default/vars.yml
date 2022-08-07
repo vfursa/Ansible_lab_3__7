@@ -1,0 +1,4 @@
+---
+# vars file for test_molecule_role
+test_conf_dir: "/home/victor/test_molecule"
+test_context_file: "{{ test_conf_dir }}/file_molecule.txt"

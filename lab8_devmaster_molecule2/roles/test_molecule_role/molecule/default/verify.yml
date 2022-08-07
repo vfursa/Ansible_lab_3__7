@@ -1,0 +1,19 @@
+---
+# This is an example playbook to execute Ansible tests.
+- name: Test file
+  hosts: localhost
+  gather_facts: false
+  tasks:
+    - name: "test"
+      stat:
+        path: "{{ test_context_file }}"
+      register: remote_file
+    - name: "test - assert that '{{ test_context_file }}' file is exists"
+      assert:
+        that:
+          - "remote_file.stat.exists"
+
+#  tasks:
+#  - name: File exists
+#    assert:
+#      that: file_test is defined
