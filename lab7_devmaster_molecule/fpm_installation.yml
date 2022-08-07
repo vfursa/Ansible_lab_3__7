@@ -1,0 +1,8 @@
+---
+# Starting playbook
+- name: Install FPM
+  hosts: all
+  become: yes
+
+  roles:
+    - {role: deploy_fpm, when: ansible_system == 'Linux'}
