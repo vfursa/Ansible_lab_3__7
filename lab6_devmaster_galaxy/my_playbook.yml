@@ -1,0 +1,21 @@
+---
+# Starting playbook
+- name: Install Software
+  hosts: all
+  become: yes
+
+  tasks:
+   - name: Deploy MySQL  
+     ansible.builtin.include: mysql_installation.yml
+
+   - name: Deploy FPM    
+     ansible.builtin.include: fpm_installation.yml
+
+   - name: Deploy wordpress    
+     ansible.builtin.include: wordpress_installation.yml
+
+   - name: Deploy nginx    
+     ansible.builtin.include: nginx_installation.yml
+  
+   - name: Tests    
+     ansible.builtin.import_tasks: tests.yml

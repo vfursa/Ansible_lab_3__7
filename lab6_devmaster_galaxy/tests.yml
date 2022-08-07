@@ -1,0 +1,18 @@
+---
+- name: Test nginx page available
+  ansible.builtin.uri: 
+    url: http://localhost
+    method: GET
+    status_code: 200
+    timeout: 1
+
+- name: Test file nginx query
+  ansible.builtin.uri:
+    url: http://localhost/ANS.png
+    method: GET
+
+- name: Check if DB answer
+  shell: mysql -e 'SHOW DATABASES;'
+  register: dbstatus
+  failed_when: dbstatus.rc == 2
+  delegate_to: localhost

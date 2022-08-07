@@ -1,0 +1,5 @@
+---
+- name: Deploy MySQL
+  ansible.builtin.include_role:
+    name: deploy_mysql
+  when: ansible_system == 'Linux'

@@ -1,0 +1,10 @@
+---
+extends: default
+
+rules: 
+  line-length:
+    max: 100
+    level: warning
+
+ignore: |
+  /home/victor/Ansible_lab_3__7/lab6_devmaster_galaxy/my_playbook.yml
