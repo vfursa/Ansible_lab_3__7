@@ -1,0 +1,5 @@
+---
+- name: Deploy nginx
+  ansible.builtin.include_role:
+    name: deploy_nginx
+  when: ansible_system == 'Linux'

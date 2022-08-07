@@ -1,0 +1,5 @@
+---
+- name: Deploy FPM
+  ansible.builtin.include_role:
+    name: deploy_fpm
+  when: ansible_system == 'Linux'
