@@ -1,0 +1,9 @@
+---
+# tasks file for test_molecule_role
+- name: Create file
+  copy:
+    dest: /home/victor/file_molecule.txt
+    content: |
+      Text Line1, in file_molecule
+      Text Line2, in file_molecule
+
