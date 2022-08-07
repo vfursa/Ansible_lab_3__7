@@ -1,0 +1,7 @@
+---
+- name: Install MySQL
+  hosts: all
+  become: yes
+
+  roles:
+    - {role: deploy_mysql, when: ansible_system == 'Linux'}

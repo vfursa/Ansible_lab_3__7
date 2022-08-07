@@ -1,0 +1,8 @@
+---
+# Starting playbook
+- name: Install Wordpress
+  hosts: all
+  become: yes
+
+  roles:
+    - {role: deploy_wordpress, when: ansible_system == 'Linux'}
